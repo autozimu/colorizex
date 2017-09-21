@@ -4,7 +4,14 @@ version = "0.1.0"
 authors = ["Junfeng Li <lijunfen@amazon.com>"]
 
 [dependencies]
+error-chain = "*"
+log = "*"
+
 structopt = "*"
 structopt-derive = "*"
+
 regex = "*"
 colored = "*"
+
+[dev-dependencies]
+env_logger = "*"
