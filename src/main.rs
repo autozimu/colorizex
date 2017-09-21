@@ -88,7 +88,7 @@ fn run() -> Result<()> {
             line = colorize(&line, &pair.0, pair.1)?;
         }
 
-        print!("{:?}", line);
+        print!("{}", line);
     }
 
     Ok(())
