@@ -4,3 +4,7 @@ version = "0.1.0"
 authors = ["Junfeng Li <lijunfen@amazon.com>"]
 
 [dependencies]
+structopt = "*"
+structopt-derive = "*"
+regex = "*"
+colored = "*"
