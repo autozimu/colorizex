@@ -1,0 +1,6 @@
+[package]
+name = "colorizex"
+version = "0.1.0"
+authors = ["Junfeng Li <lijunfen@amazon.com>"]
+
+[dependencies]
