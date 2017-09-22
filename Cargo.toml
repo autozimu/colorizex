@@ -1,8 +1,12 @@
 [package]
 name = "colorizex"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Junfeng Li <lijunfen@amazon.com>"]
 description = "A CLI that colorize"
+homepage = "https://github.com/autozimu/gdb_mi"
+repository = "https://github.com/autozimu/gdb_mi"
+readme = "README.md"
+keywords = ["cli", "color", "colorize"]
 license = "MIT"
 
 [dependencies]
