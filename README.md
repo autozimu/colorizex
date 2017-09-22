@@ -2,6 +2,9 @@
 
 A CLI that colorize.
 
+- Crate: <https://crates.io/crates/colorizex>
+- Documentation: <https://docs.rs/colorizex>
+
 # Usage
 ```
 USAGE:
