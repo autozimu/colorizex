@@ -2,16 +2,18 @@
 name = "colorizex"
 version = "0.1.0"
 authors = ["Junfeng Li <lijunfen@amazon.com>"]
+description = "A CLI that colorize"
+license = "MIT"
 
 [dependencies]
-error-chain = "*"
-log = "*"
+error-chain = "0.*"
+log = "0.*"
 
-structopt = "*"
-structopt-derive = "*"
+structopt = "0.*"
+structopt-derive = "0.*"
 
-regex = "*"
-colored = "*"
+regex = "0.*"
+colored = "1.*"
 
 [dev-dependencies]
-env_logger = "*"
+env_logger = "0.*"
