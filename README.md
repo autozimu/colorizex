@@ -5,6 +5,11 @@ A CLI that colorize.
 - Crate: <https://crates.io/crates/colorizex>
 - Documentation: <https://docs.rs/colorizex>
 
+# Install
+```sh
+cargo install colorizex
+```
+
 # Usage
 ```
 USAGE:
