@@ -25,13 +25,18 @@ extern crate colored;
 use colored::{Color, Colorize};
 use std::str::FromStr;
 
-fn colorize(line: &String, regex: &Regex, color: &str) -> Result<String> {
-    let mut cline = line.clone();
-    for mat in regex.find_iter(line) {
-        cline.splice(
-            mat.start()..mat.end(),
-            format!("{}", line[mat.start()..mat.end()].color(color)).as_str(),
-        );
+fn colorize(line: &str, regex: &Regex, color: &str) -> Result<String> {
+    let mut line = line;
+    let mut cline = String::new();
+    loop {
+        if let Some(mat) = regex.find(line) {
+            cline += &line[..mat.start()];
+            cline += format!("{}", line[mat.start()..mat.end()].color(color)).as_str();
+            line = &line[mat.end()..];
+        } else {
+            cline += line;
+            break;
+        }
     }
 
     Ok(cline)
@@ -43,7 +48,11 @@ fn test_colorize() {
     let regex = Regex::new("NB").unwrap();
     let color = "red";
     let cline = colorize(&line, &regex, color).unwrap();
-    assert_eq!(cline, "\u{1b}[31mNB\u{1b}[0m")
+    assert_eq!(cline, "\u{1b}[31mNB\u{1b}[0m");
+
+    let line = "nbNBNBnb".to_owned();
+    let cline = colorize(&line, &regex, color).unwrap();
+    assert_eq!(cline, "nb\u{1b}[31mNB\u{1b}[0m\u{1b}[31mNB\u{1b}[0mnb");
 }
 
 fn run() -> Result<()> {
