@@ -1,20 +1,15 @@
-#![feature(splice)]
+#[macro_use]
+extern crate failure;
+
+type Result<T> = std::result::Result<T, failure::Error>;
 
 #[macro_use]
-extern crate error_chain;
-mod errors {
-    error_chain!{}
-}
-use errors::*;
-
 extern crate structopt;
 use structopt::StructOpt;
-#[macro_use]
-extern crate structopt_derive;
 
 #[derive(Debug, StructOpt)]
 struct Arguments {
-    #[structopt(help = "regular expression and color pairs")]
+    #[structopt(help = "regex and color pair(s)")]
     regexcolors: Vec<String>,
 }
 
@@ -57,14 +52,13 @@ fn test_colorize() {
 
 fn run() -> Result<()> {
     let args = Arguments::from_args();
-
-    if args.regexcolors.len() == 0 {
-        bail!(Arguments::clap().get_matches().usage());
-    }
-
+    ensure!(
+        args.regexcolors.len() > 0,
+        "Regex and color pair should be more than 1!"
+    );
     ensure!(
         args.regexcolors.len() % 2 == 0,
-        "Wrong number of regex and color"
+        "Regex and color should be in pair!"
     );
 
     let mut regexcolors: Vec<(Regex, &str)> = vec![];
@@ -73,27 +67,21 @@ fn run() -> Result<()> {
         if i % 2 == 0 {
             regex = rc;
         } else {
-            let regex = Regex::new(regex.as_str()).chain_err(|| {
-                format!("Failed to construct regex: {}", regex)
-            })?;
-            Color::from_str(rc.as_str()).map_err(|_| {
-                format!("Failed to convert string to Color: {}", rc)
-            })?;
+            let regex = Regex::new(regex)?;
+            let _ = Color::from_str(rc).map_err(|_| failure::err_msg("Color not found!"))?;
             regexcolors.push((regex, rc));
         }
     }
 
     loop {
         let mut line = String::new();
-        let size = io::stdin().read_line(&mut line).chain_err(
-            || "Failed to readline",
-        )?;
+        let size = io::stdin().read_line(&mut line)?;
 
         if size == 0 {
             break;
         }
 
-        for ref pair in regexcolors.iter() {
+        for pair in &regexcolors {
             line = colorize(&line, &pair.0, pair.1)?;
         }
 
@@ -103,4 +91,8 @@ fn run() -> Result<()> {
     Ok(())
 }
 
-quick_main!(run);
+fn main() {
+    if let Err(err) = run() {
+        println!("{}", err);
+    }
+}

@@ -3,21 +3,20 @@ name = "colorizex"
 version = "0.1.1"
 authors = ["Junfeng Li <lijunfen@amazon.com>"]
 description = "A CLI that colorize"
-homepage = "https://github.com/autozimu/gdb_mi"
-repository = "https://github.com/autozimu/gdb_mi"
+homepage = "https://github.com/autozimu/colorizex"
+repository = "https://github.com/autozimu/colorizex"
 readme = "README.md"
 keywords = ["cli", "color", "colorize"]
 license = "MIT"
 
 [dependencies]
-error-chain = "0.*"
-log = "0.*"
+failure = "0"
+log = "0"
 
-structopt = "0.*"
-structopt-derive = "0.*"
+structopt = "0"
 
-regex = "0.*"
-colored = "1.*"
+regex = "1"
+colored = "1"
 
 [dev-dependencies]
-env_logger = "0.*"
+env_logger = "0"
