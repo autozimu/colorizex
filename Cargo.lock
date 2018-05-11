@@ -84,7 +84,7 @@ dependencies = [
 
 [[package]]
 name = "colorizex"
-version = "0.1.3-alpha.0"
+version = "0.1.2"
 dependencies = [
  "colored 1.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "env_logger 0.5.10 (registry+https://github.com/rust-lang/crates.io-index)",

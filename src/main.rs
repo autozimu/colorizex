@@ -50,7 +50,7 @@ fn test_colorize() {
     assert_eq!(cline, "nb\u{1b}[31mNB\u{1b}[0m\u{1b}[31mNB\u{1b}[0mnb");
 }
 
-fn run() -> Result<()> {
+fn main() -> Result<()> {
     let args = Arguments::from_args();
     ensure!(
         args.regexcolors.len() > 0,
@@ -89,10 +89,4 @@ fn run() -> Result<()> {
     }
 
     Ok(())
-}
-
-fn main() {
-    if let Err(err) = run() {
-        println!("{}", err);
-    }
 }
